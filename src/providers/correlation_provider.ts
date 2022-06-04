@@ -41,25 +41,23 @@ export async function get_objects(callback:any)
     ),
     object_alias AS (
         SELECT generalization.id_object_to id_object,
-        object_name.name alias 
+        object.name alias 
         FROM generalization
         INNER JOIN closest_parent ON closest_parent.id_object_to = generalization.id_object_to AND closest_parent.min_depth = generalization.depth
-        INNER JOIN object_name ON object_name.id_object = generalization.id_object_from
+        INNER JOIN object ON object.id = generalization.id_object_from
     ),
     color_alias AS (
         SELECT generalization.id_object_to id_object,
-        object_color.value 
+        object.color alias
         FROM generalization
         INNER JOIN closest_parent ON closest_parent.id_object_to = generalization.id_object_to AND closest_parent.min_depth = generalization.depth
-        INNER JOIN object_color ON object_color.id_object = generalization.id_object_from
+        INNER JOIN object ON object.id = generalization.id_object_from
     )
     SELECT object.id,
-    object_name.name is NOT null named,
-    IFNULL(IFNULL(object_color.value, (SELECT value FROM color_alias WHERE id_object = object.id)),'white') color,
-    IFNULL(CONCAT(object_name.name,' ',object.id), IFNULL(CONCAT((SELECT alias FROM object_alias WHERE id_object = object.id),' ',object.id),object.id)) AS name
-    FROM object
-    LEFT JOIN object_name ON object_name.id_object = object.id
-    LEFT JOIN object_color ON object_color.id_object = object.id`, 
+    object.name is NOT null named,
+    IFNULL(IFNULL(object.color, (SELECT alias FROM color_alias WHERE id_object = object.id)),'white') color,
+    IFNULL(CONCAT(object.name,' ',object.id), IFNULL(CONCAT((SELECT alias FROM object_alias WHERE id_object = object.id),' ',object.id),object.id)) AS name
+    FROM object`,
     (err:any, rows:object) => {
         if (err) {
             reject(err)
@@ -74,7 +72,7 @@ export async function get_objects(callback:any)
     })
     correlations.forEach(item => {
         item.object = objects.find(o => o.id === item.id_object_to)
-        objects.find(o => o.id === item.id_object_from).correlations.push(item)
+        objects.find(o => o.id === item.id_object_from)?.correlations.push(item)
     });
     objects.sort((a:any, b:any) => {
         if (a.named && !b.named) {
