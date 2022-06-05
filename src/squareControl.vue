@@ -12,7 +12,7 @@ const { object } = toRefs(props)
       {{ object.name }}
       </div>
       <div class="card-body">
-        <table class="card-table">
+        <table class="card-table" v-if="object.correlations.length > 0">
           <tr>
             <th>Correlation</th>
             <th>To</th>
