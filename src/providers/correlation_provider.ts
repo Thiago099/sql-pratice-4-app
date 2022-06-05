@@ -81,6 +81,12 @@ export async function get_objects(callback:any)
         if (!a.named && b.named) {
             return 1
         }
+        if (a.color < b.color) {
+            return -1
+        }
+        if (a.color > b.color) {
+            return 1
+        }
         if (a.name < b.name) {
             return -1
         }
