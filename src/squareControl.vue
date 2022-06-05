@@ -61,6 +61,7 @@ const { object } = toRefs(props)
   height: calc(100% - 20px);  
   width: calc(100% - 20px);
   margin:10px;
+  min-height: 150px;
 }
 .card-container{
   width: 400px;
