@@ -55,8 +55,8 @@ export async function get_objects(callback:any)
     )
     SELECT object.id,
     object.name is NOT null named,
-    IFNULL(IFNULL(object.color, (SELECT alias FROM color_alias WHERE id_object = object.id)),'white') color,
-    IFNULL(CONCAT(object.name,' ',object.id), IFNULL(CONCAT((SELECT alias FROM object_alias WHERE id_object = object.id),' ',object.id),object.id)) AS name
+    IFNULL(IFNULL(object.color, (SELECT alias FROM color_alias WHERE id_object = object.id group by '0')),'white') color,
+    IFNULL(CONCAT(object.name,' ',object.id), IFNULL(CONCAT((SELECT alias FROM object_alias WHERE id_object = object.id group by '0'),' ',object.id),object.id)) AS name
     FROM object`,
     (err:any, rows:object) => {
         if (err) {
