@@ -19,9 +19,9 @@ const { object } = toRefs(props)
             <th>Id</th>
           </tr>
           <tr v-for="(correlation,index) in object.correlations" :key="correlation">  
-            <td><div :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'5'}px;margin-left:3px`">{{correlation.correlation}}</div></td>
-            <td><div :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'5'}px`">{{correlation.object?.name}}</div></td>
-            <td><div :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'5'}px;margin-right:3px`">{{ correlation.id }}</div></td>
+            <td><div :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'3'}px;margin-left:3px`">{{correlation.correlation}}</div></td>
+            <td><div :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'3'}px`">{{correlation.object?.name}}</div></td>
+            <td><div :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'3'}px;margin-right:3px`">{{ correlation.id }}</div></td>
           </tr>
         </table>
       </div>
