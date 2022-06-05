@@ -19,9 +19,9 @@ const { object } = toRefs(props)
             <th>Id</th>
           </tr>
           <tr v-for="(correlation,index) in object.correlations" :key="correlation">  
-            <td><div :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'3'}px;margin-left:3px;height:19px;line-height: 19px;`">{{correlation.correlation}}</div></td>
-            <td><div :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'3'}px;height:19px;line-height: 19px;`">{{correlation.object?.name}}</div></td>
-            <td><div :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'3'}px;margin-right:3px;height:19px;line-height: 19px;`">{{ correlation.id }}</div></td>
+            <td><div class="item" :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'3'}px;margin-left:3px;`">{{correlation.correlation}}</div></td>
+            <td><div class="item" :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'3'}px;`">{{correlation.object?.name}}</div></td>
+            <td><div class="item" :style="`background-color:${correlation.object?.color};padding:5px;margin-top:${index==0?'10':'3'}px;margin-right:3px;`">{{ correlation.id }}</div></td>
           </tr>
         </table>
       </div>
@@ -65,5 +65,13 @@ const { object } = toRefs(props)
 }
 .card-container{
   width: 400px;
+}
+.item{
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border: 1px solid black;
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
 }
 </style>
